@@ -9,7 +9,6 @@ defmodule Codeforces.Application do
   def start(_type, _args) do
     children = [
       CodeforcesWeb.Telemetry,
-      Codeforces.Repo,
       {DNSCluster, query: Application.get_env(:codeforces, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Codeforces.PubSub},
       # Start the Finch HTTP client for sending emails

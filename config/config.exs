@@ -8,7 +8,6 @@
 import Config
 
 config :codeforces,
-  ecto_repos: [Codeforces.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
