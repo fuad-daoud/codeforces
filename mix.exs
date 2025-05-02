@@ -32,7 +32,7 @@ defmodule Codeforces.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:httpoison, "~> 2.0"},
+      {:zigler, "~> 0.13.3", runtime: false},
       {:phoenix, "~> 1.7.20"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
