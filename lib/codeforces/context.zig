@@ -1,7 +1,18 @@
-const Codeforces = @import("client.zig");
 const std = @import("std");
-const Allocator = std.mem.Allocator;
 const beam = @import("beam");
+
+const log = std.log.scoped(.Context);
+
+pub const Contest = struct {
+    id: i32,
+    name: []const u8,
+};
+
+pub fn transformContestData(contestList: []Contest) !void {
+    _ = contestList;
+    log.info("Starting {s}..", .{"transformContestData"});
+    defer log.info("Finished {s}..", .{"transformContestData"});
+}
 
 pub fn arenaSum(array: beam.term) !u64 {
     var arena = std.heap.ArenaAllocator.init(beam.allocator);
@@ -17,34 +28,4 @@ pub fn arenaSum(array: beam.term) !u64 {
     }
 
     return total;
-}
-
-pub fn contestList() !u8 {
-    var arena = std.heap.ArenaAllocator.init(beam.allocator);
-    defer arena.deinit();
-    const allocator = arena.allocator();
-
-    var client = Codeforces.Client.init(allocator);
-    defer client.deinit();
-
-    const contests_json = try client.getContestList();
-    defer allocator.free(contests_json);
-    //
-    // // Print the first 200 bytes of the response
-    // const print_len = @min(contests_json.len, 200);
-    // std.log.debug("First {d} bytes of response:\n{s}\n", .{ print_len, contests_json[0..print_len] });
-    //
-    // // Parse the JSON
-    // const json_parse_options = std.json.ParseOptions{
-    //     .ignore_unknown_fields = true,
-    // };
-    //
-    // const parsed = try std.json.parseFromSlice(std.json.Value, allocator, contests_json, json_parse_options);
-    // defer parsed.deinit();
-    //
-    // std.log.debug("API json: {s}\n", .{contests_json});
-    // // Print the status field to verify successful parsing
-    // const status = parsed.value.object.get("status").?.string;
-    // std.log.debug("API Status: {s}\n", .{status});
-    return 0;
 }

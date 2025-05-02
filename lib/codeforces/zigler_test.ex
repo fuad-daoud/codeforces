@@ -7,10 +7,10 @@ defmodule Mix.Tasks.ZiglerTest do
     Mix.Task.run("app.config")
 
     # Call your Zigler functions here
-    result = Codeforces.Client.arenaSum([1, 2, 3])
+    result = Codeforces.Context.arenaSum([1, 2, 3])
     IO.puts("Result: #{inspect(result)}")
 
-    result = Codeforces.Client.contestList()
+    result = Codeforces.Context.transformContestData([%{id: 123, name: "123", newfield: "hi"}])
     IO.puts("Result: #{inspect(result)}")
   end
 end
