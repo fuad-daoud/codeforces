@@ -1,29 +1,41 @@
 const std = @import("std");
 const httpz = @import("httpz");
+const Template = @import("template.zig");
 
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}){};
     const allocator = gpa.allocator();
 
-    // More advance cases will use a custom "Handler" instead of "void".
-    // The last parameter is our handler instance, since we have a "void"
-    // handler, we passed a void ({}) value.
     var server = try httpz.Server(void).init(allocator, .{ .port = 8080 }, {});
     defer {
-        // clean shutdown, finishes serving any live request
         server.stop();
         server.deinit();
     }
 
     var router = try server.router(.{});
-    router.get("/", getUser, .{});
+    router.get("/", home, .{});
 
-    // blocks
     try server.listen();
 }
 
-fn getUser(req: *httpz.Request, res: *httpz.Response) !void {
-    _ = req;
-    res.status = 200;
-    res.body = "Hello, World!";
+fn home(req: *httpz.Request, res: *httpz.Response) !void {
+    const allocator = req.arena;
+
+    // const template_src = @embedFile("templates/home.html");
+    // const template = Template.Template.init(allocator, template_src);
+    var template = try Template.Template.initFromFile(allocator, "src/templates/home.html");
+    defer template.deinit();
+
+    const data = .{
+        .items = &[_][]const u8{
+            "gon",
+            "immortalfox",
+        },
+        .contests = &[_]struct { name: []const u8, link: []const u8, problems: []const []const u8 }{
+            .{ .name = "Educational Codeforces Round 178 (Rated for Div. 2)", .link = "https://codeforces.com/contest/2104", .problems = &[_][]const u8{ "ABC", "ABCD" } },
+        },
+    };
+
+    const result = try template.render(data);
+    res.body = result;
 }

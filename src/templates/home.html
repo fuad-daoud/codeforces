@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="”refresh”" content="”10″" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <!-- <h1 class="">Hello world!</h1> -->
+    <!-- <h1>{{heading}}</h1> -->
+    <!-- <p>{{description}}</p> -->
+    <!---->
+    <!-- <h2>Menu Items:</h2> -->
+    <!-- <ul> -->
+    <!--   {{#each items}} -->
+    <!--   <li>{{name}} - ${{price}}</li> -->
+    <!--   {{/each}} -->
+    <!-- </ul> -->
+    <div class="relative overflow-x-auto">
+      <table
+        class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+      >
+        <thead
+          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-6 py-3">Contest</th>
+            {{#each items}}
+            <th scope="col" class="px-6 py-3">{{this}}</th>
+            {{/each}}
+          </tr>
+        </thead>
+        <tbody>
+          {{#each contests}}
+          <tr
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200"
+          >
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+            >
+              {{name}} {{link}}
+            </th>
+
+            {{#each problems}}
+            <td class="px-6 py-4">{{this}}</td>
+            {{/each}}
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
