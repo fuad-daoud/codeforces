@@ -38,7 +38,7 @@ pub fn main() !void {
 fn home(req: *httpz.Request, res: *httpz.Response) !void {
     log.info("starting {s}..", .{"home"});
     const allocator = req.arena;
-    var template = try Template.Template.init(allocator, "templates/home.html");
+    var template = try Template.init(allocator, "templates/home.html");
     defer template.deinit();
     const Problem = struct { solved: []const u8, unsolved: []const u8 };
     const Contest = struct { name: []const u8, link: []const u8, problems: []const Problem };
