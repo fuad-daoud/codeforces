@@ -36,6 +36,8 @@ pub fn build(b: *std.Build) void {
         .name = "codeforces",
         .root_module = exe_mod,
     });
+
+    //
     const httpz = b.dependency("httpz", .{
         .target = target,
         .optimize = optimize,

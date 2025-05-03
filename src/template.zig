@@ -1,19 +1,24 @@
 const std = @import("std");
+const builtin = @import("builtin");
 
 pub const Template = struct {
     allocator: std.mem.Allocator,
     content: []const u8,
     owned: bool,
 
-    pub fn init(allocator: std.mem.Allocator, content: []const u8) Template {
-        return .{
-            .allocator = allocator,
-            .content = content,
-            .owned = false,
-        };
+    pub fn init(allocator: std.mem.Allocator, comptime content: []const u8) !Template {
+        if (builtin.mode == .ReleaseSafe) {
+            return .{
+                .allocator = allocator,
+                .content = @embedFile(content),
+                .owned = false,
+            };
+        }
+
+        return try initFromFile(allocator, "src/" ++ content);
     }
 
-    pub fn initFromFile(allocator: std.mem.Allocator, path: []const u8) !Template {
+    fn initFromFile(allocator: std.mem.Allocator, path: []const u8) !Template {
         const file = try std.fs.cwd().openFile(path, .{});
         defer file.close();
 
