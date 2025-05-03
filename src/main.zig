@@ -24,7 +24,8 @@ pub fn main() !void {
 
     const port = 8080;
 
-    var app = try App.init(allocator);
+    // 10s
+    var app = try App.init(allocator, 10);
 
     var server = try httpz.Server(*App).init(allocator, .{ .port = port, .address = "0.0.0.0" }, &app);
     defer {
