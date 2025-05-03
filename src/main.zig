@@ -25,14 +25,41 @@ fn home(req: *httpz.Request, res: *httpz.Response) !void {
     // const template = Template.Template.init(allocator, template_src);
     var template = try Template.Template.initFromFile(allocator, "src/templates/home.html");
     defer template.deinit();
+    const Problem = struct { solved: []const u8, unsolved: []const u8 };
+    const Contest = struct { name: []const u8, link: []const u8, problems: []const Problem };
 
     const data = .{
         .items = &[_][]const u8{
             "gon",
             "immortalfox",
         },
-        .contests = &[_]struct { name: []const u8, link: []const u8, problems: []const []const u8 }{
-            .{ .name = "Educational Codeforces Round 178 (Rated for Div. 2)", .link = "https://codeforces.com/contest/2104", .problems = &[_][]const u8{ "ABC", "ABCD" } },
+        .contests = &[_]Contest{
+            .{
+                .name = "Educational Codeforces Round 178 (Rated for Div. 2)",
+                .link = "https://codeforces.com/contest/2104",
+                .problems = &[_]Problem{ .{ .solved = "ABC", .unsolved = "ABCD" }, .{ .solved = "ABC", .unsolved = "ABCD" } },
+            },
+
+            .{
+                .name = "Educational Codeforces Round 178 (Rated for Div. 2)",
+                .link = "https://codeforces.com/contest/2104",
+                .problems = &[_]Problem{ .{ .solved = "ABC", .unsolved = "ABCD" }, .{ .solved = "ABC", .unsolved = "ABCD" } },
+            },
+            .{
+                .name = "Educational Codeforces Round 178 (Rated for Div. 2)",
+                .link = "https://codeforces.com/contest/2104",
+                .problems = &[_]Problem{ .{ .solved = "ABC", .unsolved = "ABCD" }, .{ .solved = "ABC", .unsolved = "ABCD" } },
+            },
+            .{
+                .name = "Educational Codeforces Round 178 (Rated for Div. 2)",
+                .link = "https://codeforces.com/contest/2104",
+                .problems = &[_]Problem{ .{ .solved = "ABC", .unsolved = "ABCD" }, .{ .solved = "ABC", .unsolved = "ABCD" } },
+            },
+            .{
+                .name = "Educational Codeforces Round 178 (Rated for Div. 2)",
+                .link = "https://codeforces.com/contest/2104",
+                .problems = &[_]Problem{ .{ .solved = "ABC", .unsolved = "ABCD" }, .{ .solved = "ABC", .unsolved = "ABCD" } },
+            },
         },
     };
 

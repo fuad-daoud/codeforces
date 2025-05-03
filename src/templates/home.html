@@ -28,7 +28,7 @@
           <tr>
             <th scope="col" class="px-6 py-3">Contest</th>
             {{#each items}}
-            <th scope="col" class="px-6 py-3">{{this}}</th>
+            <th scope="col" class="px-6 py-3 text-center">{{this}}</th>
             {{/each}}
           </tr>
         </thead>
@@ -45,7 +45,13 @@
             </th>
 
             {{#each problems}}
-            <td class="px-6 py-4">{{this}}</td>
+            <!-- codeforces green #0a0; -->
+            <td class="px-6 py-4">
+              <div class="flex flex-row justify-center-safe">
+                <p class="text-green-200">{{solved}}</p>
+                <p class="text-red-200">{{unsolved}}</p>
+              </div>
+            </td>
             {{/each}}
           </tr>
           {{/each}}
