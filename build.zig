@@ -44,6 +44,12 @@ pub fn build(b: *std.Build) void {
     });
     exe.root_module.addImport("httpz", httpz.module("httpz"));
 
+    const cache_zig = b.dependency("cache_zig", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    exe.root_module.addImport("cache_zig", cache_zig.module("cache_zig"));
+
     // This declares intent for the executable to be installed into the
     // standard location when the user invokes the "install" step (the default
     // step when running `zig build`).

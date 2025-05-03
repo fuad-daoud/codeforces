@@ -40,6 +40,10 @@
             .url = "git+https://github.com/karlseguin/http.zig?ref=master#163fd691f46e222d3aa9d15831f7128ce55a58bc",
             .hash = "httpz-0.0.0-PNVzrA63BgDRcEWrLJ0p9VGOK5ib-neHf2RN0SoueEMR",
         },
+        .cache_zig = .{
+            .url = "git+https://github.com/fuad-daoud/cache.zig?ref=master#054187060d24356743bcce8be4d9e9d81eb0f6ad",
+            .hash = "cache_zig-0.0.0-SUZy9_-MAACPMRgHFz9MlP-YH1RoRIsJSh_5Daz7Hv25",
+        },
     },
     .paths = .{
         "build.zig",
